@@ -1,6 +1,6 @@
 import {
     combineReducers
-} from 'redux'
+} from 'redux';
 
 
 export const messageOne = (state = { message1: "Initial Message 1" }, action) => {

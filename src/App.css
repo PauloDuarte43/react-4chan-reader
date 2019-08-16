@@ -1,0 +1,135 @@
+div.scrollmenu {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+  }
+  
+  div.scrollmenu::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  div.scrollmenu::-webkit-scrollbar-track {
+    background: #999;
+  }
+  
+  /* Handle */
+  div.scrollmenu::-webkit-scrollbar-thumb {
+    background: rgb(71, 71, 71);
+  }
+  
+  /* Handle on hover */
+  div.scrollmenu::-webkit-scrollbar-thumb:hover {
+    background: rgb(71, 71, 71);
+  }
+  
+  
+  div.scrollmenu span {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+  
+  div.scrollmenu a:hover {
+    background-color: #777;
+  }
+  
+  .menu-container {
+    min-width: 100vw;
+  }
+  
+  #root .ws-form-check {
+    padding-left: 0;
+  }
+  
+  .not-ws {
+    color: #fa0303;
+  }
+  
+  .control {
+    font-family: arial;
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 5px;
+    padding-top: 3px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .control input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+  
+  .control_indicator {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background: #fa0303;
+    border: 0px solid #000000;
+    border-radius: 25%;
+  }
+  
+  .control-radio .control_indicator {
+    border-radius: 25%;
+  }
+  
+  .control:hover input~.control_indicator,
+  .control input:focus~.control_indicator {
+    background: #ff2525;
+  }
+  
+  .control input:checked~.control_indicator {
+    background: #2aa1c0;
+  }
+  
+  .control:hover input:not([disabled]):checked~.control_indicator,
+  .control input:checked:focus~.control_indicator {
+    background: #0e6647;
+  }
+  
+  .control input:disabled~.control_indicator {
+    background: #e6e6e6;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
+  .control_indicator:after {
+    box-sizing: unset;
+    content: '';
+    position: absolute;
+    display: none;
+  }
+  
+  .control input:checked~.control_indicator:after {
+    display: block;
+  }
+  
+  .control-checkbox .control_indicator:after {
+    left: 8px;
+    top: 4px;
+    width: 3px;
+    height: 8px;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  
+  .control-checkbox input:disabled~.control_indicator:after {
+    border-color: #7b7b7b;
+  }
+
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rebeccapurple;
+}
