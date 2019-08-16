@@ -1,0 +1,42 @@
+import React, { Component } from 'react';
+import {connect} from 'react-redux'
+
+import './App.css';
+
+import {changeMs1, changeMs2} from './actions';
+
+
+class App extends Component {
+  getNum() {
+    const min = 1;
+    const max = 100;
+    const rand = min + Math.random() * (max - min);
+    return rand;
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>{this.props.message1}</h1>
+        <h1>{this.props.message2}</h1>
+        <button onClick={()=>this.props.changeMs1('Teste ' + this.getNum())}>MS1</button>
+        <button onClick={()=>this.props.changeMs2('Teste ' + this.getNum())}>MS2</button>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state)=>{
+  return {
+    message1 : state.messageOne.message1,
+    message2 : state.messageTwo.message2
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  changeMs1: (payload) => dispatch(changeMs1(payload)),
+  changeMs2: (payload) => dispatch(changeMs2(payload))
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
