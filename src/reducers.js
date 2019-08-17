@@ -29,6 +29,8 @@ export const messageTwo = (state = { message2: "Initial Message 2" }, action) =>
 
 const initialAppState = { 
     ws: true,
+    wsConsent: false,
+    boardsData: [],
     wsBoards: [],
     boards: []
 }
@@ -40,6 +42,11 @@ export const AppReducer = (state = initialAppState, action) => {
                 ...state,
                 ws: action.payload
             };
+        case "changeWsConsent":
+            return {
+                ...state,
+                wsConsent: action.payload
+            };
         case "changeWsBoards":
             return {
                 ...state,
@@ -49,6 +56,11 @@ export const AppReducer = (state = initialAppState, action) => {
             return {
                 ...state,
                 boards: action.payload
+            };
+        case "changeBoardsData":
+            return {
+                ...state,
+                boardsData: action.payload
             };
         default:
             return state

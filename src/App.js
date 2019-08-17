@@ -3,27 +3,22 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import Threads from './components/threads/threads';
+import Board from './components/common/boardMenu';
+
 import './App.css';
 
 import { 
   changeMs1,
   changeMs2,
   changeWs,
+  changeWsConsent,
   changeWsBoards,
-  changeBoards
+  changeBoards,
+  changeBoardsData
 } from './actions';
 
 Modal.setAppElement('#root')
-
-class Board extends React.Component {
-  render() {
-    return (
-        <Link to={`/${this.props.data.board}`}>
-          <span className="board-menu">{this.props.data.board}</span>
-        </Link>
-    );
-  }
-}
 
 class Home extends React.Component {
   render() {
@@ -33,21 +28,10 @@ class Home extends React.Component {
   }
 }
 
-class Threads extends React.Component {
-  render() {
-    return (
-      <div>
-        <h3>Requested Param: {this.props.match.params.id}</h3>
-      </div>
-    );
-  }
-}
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);
-    console.log('constructor');
+    console.log('constructor APP');
 
     this.state = {
       modalIsOpen: false
@@ -62,12 +46,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
+    console.log('componentDidMount APP');
     this.loadBoards();
   }
 
   loadBoards() {
     axios.get('/boards.json').then((res) => {
+      this.props.changeBoardsData(res.data.boards);
       let tempBoards = [];
       let tempBoardsA = [];
       res.data.boards.forEach(function (b, index) {
@@ -85,10 +70,10 @@ class App extends React.Component {
   }
 
   handlerWs() {
-    if (this.props.ws) {
+    if (this.props.ws && !this.props.wsConsent) {
       this.openModal();
     } else {
-      this.props.changeWs(!this.props.ws);      
+      this.props.changeWs(!this.props.ws);
     }
   }
 
@@ -110,12 +95,13 @@ class App extends React.Component {
   }
 
   confirmModal() {
-    this.props.changeWs(false);
+    this.props.changeWs(!this.props.ws);
+    this.props.changeWsConsent(true);
     this.closeModal();
   }
 
   render() {
-    console.log('render')
+    console.log('render APP')
     return (
       <Router>
         <div className="container-fluid app-component">
@@ -132,7 +118,7 @@ class App extends React.Component {
             </div>
           </div>
           <div className="row">
-            <div className="col">
+            <div className="col-2">
               <form>
                 <div className="form-group form-check ws-form-check">
                   <label className="control control-checkbox">
@@ -207,8 +193,10 @@ const mapStateToProps = (state) => {
     message1: state.messageOne.message1,
     message2: state.messageTwo.message2,
     ws: state.AppReducer.ws,
+    wsConsent: state.AppReducer.wsConsent,
     wsBoards: state.AppReducer.wsBoards,
-    boards: state.AppReducer.boards
+    boards: state.AppReducer.boards,
+    boardsData: state.AppReducer.boardsData
   }
 }
 
@@ -216,8 +204,10 @@ const mapDispatchToProps = dispatch => ({
   changeMs1: (payload) => dispatch(changeMs1(payload)),
   changeMs2: (payload) => dispatch(changeMs2(payload)),
   changeWs: (payload) => dispatch(changeWs(payload)),
+  changeWsConsent: (payload) => dispatch(changeWsConsent(payload)),
   changeWsBoards: (payload) => dispatch(changeWsBoards(payload)),
-  changeBoards: (payload) => dispatch(changeBoards(payload))
+  changeBoards: (payload) => dispatch(changeBoards(payload)),
+  changeBoardsData: (payload) => dispatch(changeBoardsData(payload))
 });
 
 

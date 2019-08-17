@@ -19,6 +19,13 @@ export const changeWs = (payload) => {
     }
 }
 
+export const changeWsConsent = (payload) => {
+    return {
+        type: "changeWsConsent",
+        payload
+    }
+}
+
 export const changeWsBoards = (payload) => {
     return {
         type: "changeWsBoards",
@@ -32,3 +39,11 @@ export const changeBoards = (payload) => {
         payload
     }
 }
+
+export const changeBoardsData = (payload) => {
+    return {
+        type: "changeBoardsData",
+        payload
+    }
+}
+
